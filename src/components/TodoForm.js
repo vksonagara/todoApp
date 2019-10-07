@@ -20,17 +20,21 @@ class TodoForm extends React.Component {
     );
   }
 
-  handleFormSubmit = e => {
-    e.preventDefault();
-    this.props.triggerAddTodo(this.state.inputText);
+  handleFormSubmit = event => {
+    event.preventDefault();
+    const value = this.state.inputText.trim();
+    if (value === "") {
+      return;
+    }
+    this.props.triggerAddTodo(value);
     this.setState({
       inputText: ""
     });
   };
 
-  handleInputChange = e => {
+  handleInputChange = event => {
     this.setState({
-      inputText: e.target.value
+      inputText: event.target.value
     });
   };
 }

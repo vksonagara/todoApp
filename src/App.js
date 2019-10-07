@@ -7,6 +7,15 @@ class App extends React.Component {
     todos: []
   };
 
+  componentDidMount() {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    if (todos) {
+      this.setState({
+        todos
+      });
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -18,6 +27,11 @@ class App extends React.Component {
         />
       </div>
     );
+  }
+
+  componentDidUpdate() {
+    const todos = JSON.stringify(this.state.todos);
+    localStorage.setItem("todos", todos);
   }
 
   addTodo = todo => {
